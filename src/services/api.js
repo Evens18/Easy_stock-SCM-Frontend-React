@@ -15,8 +15,8 @@ const mockDB = {
     { id: 2, name: "Carton 60x40", sku: "BOX-6040", stock: 340, supplierId: 2 },
   ],
   suppliers: [
-    { id: 1, name: "Fournix SARL", contact: "Jean Dupont" },
-    { id: 2, name: "SupplyPro", contact: "Awa Mba" },
+    { id: 1, name: "Fournix SARL", contact: "MADOUNGOU" },
+    { id: 2, name: "SupplyPro", contact: "Ada Mba" },
   ],
   orders: [
     { id: 1, number: "CMD-0001", status: "En cours", total: 540.5 },
@@ -29,12 +29,10 @@ const wait = (ms = 300) => new Promise((r) => setTimeout(r, ms))
 // ---- AUTH ----
 export async function login(email, password) {
   if (!USE_MOCK) {
-    // backend attend "mot_de_passe"
     const { data } = await http.post("/auth/login", {
       email,
       mot_de_passe: password,
     })
-    // data = { access_token, token_type }
     return data
   }
   await wait()
@@ -42,7 +40,6 @@ export async function login(email, password) {
     (x) => x.email === email && x.password === password
   )
   if (!u) throw new Error("Identifiants invalides")
-  // on simule la même structure que le backend réel
   return {
     access_token: "mock-token",
     token_type: "bearer",

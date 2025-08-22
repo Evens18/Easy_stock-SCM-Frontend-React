@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const { access_token, token_type } = await api.login(email, password)
-    setAuth({ email, access_token, token_type }) // on stocke ce que le backend renvoie
+    setAuth({ email, access_token, token_type })
     navigate("/dashboard", { replace: true })
   }
 
